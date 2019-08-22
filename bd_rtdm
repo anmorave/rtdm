@@ -1,0 +1,64 @@
+--#rtdm_sbm_contactabilidad_clientes
+create table `5033_inteli_mercadeo`.rtdm_sbm_contactabilidad_clientes as 
+select celular1, celular2, ciudad_correspondencia, correo_siebel, departamento_telefono1,
+    departamento_telefono2,departamento_telefono3, direccion1, direccion2, direccion3,
+    municipio_telefono1,municipio_telefono2,municipio_telefono3, nombres, nro_identificacion,
+    nro_telefono1,nro_telefono2,nro_telefono3, oficina_modelo, primer_apellido, segundo_apellido,
+    tipo_identificacion,departamento_correspondencia, edad, estado_civil, fecha_nacimiento,
+    genero,ocupacion,profesion,rango_edad
+from `clientes`.sbm_contactabilidad_clientes;
+
+--#rtdm_sbl_productos_y_servicios
+create table `5033_inteli_mercadeo`.rtdm_sbl_productos_y_servicios as 
+select nro_cuenta, nro_identificacion_contacto, tipo_identificacion_contacto,
+    nombre_producto,codigo_producto,codigo_subproducto,descripcion_subproducto,
+    fecha_apertura,vigencia,tipo_de_bloqueo
+from `clientes`.sbl_productos_y_servicios
+
+--#rtdm_sbl_contactos
+create table `5033_inteli_mercadeo`.rtdm_sbl_contactos as 
+select celular_principal,nombre,nro_identificacion,primer_apellido,segundo_apellido,
+    tipo_identificacion,fecha_vinculacion,estado_civil,fecha_nacimiento,sexo,ocupacion,
+    profesion,segmento_comercial
+from `clientes`.sbl_contactos
+
+--#rtdm_fact_saldos
+create table `5033_inteli_mercadeo`.rtdm_fact_saldos as 
+select cupo_aprobado,cupo_disponible,dias_mora,estado,fecha_activacion,fecha_emision,
+    mercado,nro_identificacion,nro_producto,nro_ult_producto_vigente,oficina_radicacion,
+    pago_minimo,periodo,saldo_total_corte,tipo_identificacion,tipo_producto,vector_estado
+from activo.fact_saldos
+
+--#rtdm_listas_restrictivas
+create table `5033_inteli_mercadeo`.rtdm_listas_restrictivas as
+select tipo_identificacion, nro_identificacion
+from `clientes`.listas_restrictivas
+
+--#rtdm_sbm_clientes_pn
+create table `5033_inteli_mercadeo`.rtdm_sbm_clientes_pn as
+select tipo_identificacion,nro_identificacion,ingreso_2,segmento_2,genero,edad,actividad_laboral,
+	negados_x_verificacion,act_laboral_general
+from `clientes`.sbm_clientes_pn
+
+--#rtdm_sbm_cartera
+create table `5033_inteli_mercadeo`.rtdm_sbm_cartera as
+select cod_convenio_producto,compania,tipo_identificacion,nro_identificacion,fecha_reest,
+	normalizado,calif_definitiva,periodo
+from `8096_tec_planeacion_y_riesgo`.sbm_cartera
+
+--#rtdm_ah_saldos
+create table `5033_inteli_mercadeo`.rtdm_ah_saldos as
+select tipo_identificacion,nro_identificacion,cod_producto,nro_cuenta,fecha_apertura,
+	periodo, ind_embargos,vigencia,tipo_persona,sub_producto
+from `pasivo`.ah_saldos
+
+--#rtdm_sbm_ta_productos_tdc
+create table `5033_inteli_mercadeo`.rtdm_sbm_ta_productos_tdc as
+select codigo_producto_normal,descripcion,franquicia,negocio,nproducto,plastico,
+	producto,segmento,sistema_amortizacion,subproducto,uso
+from `referenciales`.sbm_ta_productos_tdc
+
+--#rtdm_habeas_data
+create table `5033_inteli_mercadeo`.rtdm_habeas_data as
+select tipo_identificacion,nro_identificacion
+from `clientes`.habeas_data
